@@ -45,7 +45,8 @@
                 android:id="@+id/rep"
                 android:background="@drawable/repsmall"
                 android:layout_width="75dp"
-                android:layout_height="75dp" />
+                android:layout_height="75dp"
+                android:onClick="openDataTest"/>
             <TextView
                 android:layout_width="match_parent"
                 android:text="Appointment"
@@ -58,7 +59,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:background="@drawable/locationsmall"
-                android:id="@+id/button10" />
+                android:id="@+id/button10"/>
             <TextView
                 android:layout_width="match_parent"
                 android:text="Locations"

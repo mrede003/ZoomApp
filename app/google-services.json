@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "326008847712",
+    "firebase_url": "https://backendtest-d7cc8.firebaseio.com",
+    "project_id": "backendtest-d7cc8",
+    "storage_bucket": "backendtest-d7cc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326008847712:android:b79420ab0c017f2f",
+        "android_client_info": {
+          "package_name": "com.mrede003.zoomwireless.zoomapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326008847712-0kpc23bd4bir8tseoffcn1m4cv13sugm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpbJ_0X1KQIaYHYpkumUTjzCohJFvbCVI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
