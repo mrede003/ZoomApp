@@ -3,33 +3,66 @@ package com.mrede003.zoomwireless.zoomapp;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class Promos extends ListActivity {
 
-    private ArrayList<String> list;
+    private static final String TAG = "PromosActivity";
+    private ArrayList<String> list=new ArrayList<>();
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promos);
 
+        final ArrayAdapter<String> adapter=new ArrayAdapter<>(getListView().getContext(),
+                android.R.layout.simple_list_item_1, list);
+        getListView().setAdapter(adapter);
+        database=FirebaseDatabase.getInstance();
+        myRef = database.getReference("Promos");
 
-        DatabaseHelper db=DatabaseHelper.getInstance(this);
-        Cursor cursor=db.getAllData();
-        if(cursor.getCount()==0) {
-            Toast.makeText(Promos.this, "No data", Toast.LENGTH_LONG).show();
-        }else{
-            list=new ArrayList<>();
-            while(cursor.moveToNext())
-            {
-                list.add(cursor.getString(0)+" "+cursor.getString(1));
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String value=dataSnapshot.getValue(String.class);
+                list.add(value);
+                adapter.notifyDataSetChanged();
             }
-            ArrayAdapter<String> adapter=new ArrayAdapter<>(getListView().getContext(), android.R.layout.simple_list_item_1, list);
-            getListView().setAdapter(adapter);
-        }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }
