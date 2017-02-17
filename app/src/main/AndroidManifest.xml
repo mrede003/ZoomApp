@@ -16,7 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Promos" />
-        <activity android:name=".DataTest" />
         <activity android:name=".PromoDisplay"></activity>
     </application>
 

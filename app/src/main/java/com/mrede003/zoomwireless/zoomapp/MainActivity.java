@@ -18,10 +18,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this, Promos.class);
         startActivity(intent);
     }
-    public void openDataTest(View vew)
-    {
-        Intent intent=new Intent(this, DataTest.class);
-        startActivity(intent);
-    }
+
 
 }
