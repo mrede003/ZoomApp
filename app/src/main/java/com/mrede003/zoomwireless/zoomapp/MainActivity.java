@@ -23,14 +23,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this, DataTest.class);
         startActivity(intent);
     }
-    public void singletonTest(View view)
-    {
-        DatabaseHelper db=DatabaseHelper.getInstance(this);
-        boolean b=db.insertData("Main Activity");
-        if(b==true){
-            Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(MainActivity.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
-        }
-    }
+
 }

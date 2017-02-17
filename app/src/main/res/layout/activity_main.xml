@@ -30,13 +30,13 @@
 
             <Button
                 android:id="@+id/coupon"
-                android:background="@drawable/coupon"
+                android:background="@drawable/couponsmall"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:onClick="openPromos"/>
             <TextView
                 android:layout_width="match_parent"
-                android:text="Coupons"
+                android:text="Promos"
                 android:textAlignment="center"
                 android:textStyle="normal|bold"
                 android:layout_height="20dp"
@@ -82,10 +82,10 @@
             <Button
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:background="@drawable/promo"/>
+                android:background="@drawable/notification"/>
             <TextView
                 android:layout_width="match_parent"
-                android:text="Promos"
+                android:text="Notifications"
                 android:textAlignment="center"
                 android:textStyle="normal|bold"
                 android:layout_height="20dp"
@@ -115,8 +115,8 @@
         </LinearLayout>
     </LinearLayout>
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="135dp"
+        android:layout_width="260dp"
+        android:layout_height="155dp"
         android:background="@drawable/zoomlogosmall"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
