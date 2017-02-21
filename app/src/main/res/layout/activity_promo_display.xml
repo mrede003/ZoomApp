@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_promo_display"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -16,46 +16,58 @@
         android:id="@+id/promoImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"/>
+
     <TextView
+        android:id="@+id/promoDescriptionView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/promoImage"
-        android:text="EXPIRES DECEMBER 31, 2017"
-        android:textSize="30dp"
-        android:textAlignment="center"/>
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:background="@drawable/textviewborder"/>
+    <Space
+        android:id="@+id/promoDisplaySpace"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+    <TextView
+        android:id="@+id/expDateView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:background="@drawable/textviewborder"
+        android:textStyle="normal|bold" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="#c6c9ce">
 
         <TextView
             android:id="@+id/sharePromoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Share this promotion!"
+            android:text="Interested?"
             android:textSize="25dp"
             android:textColor="@android:color/black"
             android:layout_centerHorizontal="true"/>
-        <EditText
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:hint="10 Digit Phone Number"
+            android:text="Let us reach out to you!"
+            android:textAllCaps="false"
             android:id="@+id/phoneNumberText"
             android:layout_below="@id/sharePromoTextView"
             android:layout_centerHorizontal="true"/>
 
         <Button
-            android:text="Send SMS/Text Message"
+            android:text="Get in touch with a specialist now!"
             android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sendSMSButton"
             android:layout_below="@id/phoneNumberText"
-            android:layout_centerHorizontal="true"
-            android:onClick="extractPhoneInfo"/>
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

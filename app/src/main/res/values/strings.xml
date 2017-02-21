@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ZoomApp</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="schedule_title">Schedule Appointment</string>
+    <string name="schedule_context">Please fill out this form
+        to request an appointment at your closest Zoom Wireless. You
+        will receive a courtesy call confirming your request.</string>
+    <string name="name_view_hint">First and Last Name</string>
+    <string name="time_view_hint">Time</string>
+    <string name="date_view_hint">Date</string>
 </resources>

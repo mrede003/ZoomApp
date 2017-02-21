@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#80c2718c</color>
+    <color name="zoomRed">#CD3534</color>
+    <color name="black">#000000</color>
 </resources>

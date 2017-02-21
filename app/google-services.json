@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "326008847712",
-    "firebase_url": "https://backendtest-d7cc8.firebaseio.com",
-    "project_id": "backendtest-d7cc8",
-    "storage_bucket": "backendtest-d7cc8.appspot.com"
+    "project_number": "570829932071",
+    "firebase_url": "https://zoomapp-ba91b.firebaseio.com",
+    "project_id": "zoomapp-ba91b",
+    "storage_bucket": "zoomapp-ba91b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:326008847712:android:b79420ab0c017f2f",
+        "mobilesdk_app_id": "1:570829932071:android:b79420ab0c017f2f",
         "android_client_info": {
           "package_name": "com.mrede003.zoomwireless.zoomapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "326008847712-0kpc23bd4bir8tseoffcn1m4cv13sugm.apps.googleusercontent.com",
+          "client_id": "570829932071-6bs2qgtcrkjjc5t349uptoqirh5dsb93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mrede003.zoomwireless.zoomapp",
+            "certificate_hash": "ede91885fa56b62272692d76f2f7bce8e57a8add"
+          }
+        },
+        {
+          "client_id": "570829932071-faklic19beop0o8ahcccahlvv9qt3v6j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDpbJ_0X1KQIaYHYpkumUTjzCohJFvbCVI"
+          "current_key": "AIzaSyB90bUVkm80doq2vDPOQAJB6AQPINzaRVU"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570829932071-faklic19beop0o8ahcccahlvv9qt3v6j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

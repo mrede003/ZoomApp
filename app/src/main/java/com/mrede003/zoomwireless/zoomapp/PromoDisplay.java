@@ -11,25 +11,34 @@ import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 public class PromoDisplay extends AppCompatActivity {
-    private final int MY_PERMISSIONS_REQUEST_SEND_SMS=1;
     private String IMG_NAME;
+    private String DESCRIPTION;
+    private String EXP_DATE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_display);
         getSupportActionBar().hide();
+        Helper.setBlackStatus(this);
         Intent in= getIntent();
         Bundle b = in.getExtras();
 
         if(b!=null)
         {
+            DESCRIPTION=(String) b.get("DESCRIPTION");
+            EXP_DATE=(String) b.get("EXP_DATE");
             IMG_NAME =(String) b.get("IMG_NAME");
         }
+        TextView descriptionView= (TextView) findViewById(R.id.promoDescriptionView);
+        TextView expView= (TextView) findViewById(R.id.expDateView);
+        descriptionView.setText(DESCRIPTION);
+        expView.setText("Expires: "+EXP_DATE);
         changePic();
     }
     public void changePic()
@@ -40,37 +49,5 @@ public class PromoDisplay extends AppCompatActivity {
             .into(imageView);
     }
 
-    public void sendSMS(String phoneNo, String msg) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
-            } else {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST_SEND_SMS);
-            }
-        }
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
-            Toast.makeText(getApplicationContext(), "Message Sent",
-                    Toast.LENGTH_SHORT).show();
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
-                    Toast.LENGTH_SHORT).show();
-            ex.printStackTrace();
-        }
-    }
-    public void extractPhoneInfo(View view)
-    {
-        EditText e=(EditText) findViewById(R.id.phoneNumberText);
-        String testMessage="Hello, if you're receiving this then you are receiving a test message" +
-                " from my totally awesome app. #KTHXBYE";
-        sendSMS(e.getText().toString(), testMessage);
-    }
 }
