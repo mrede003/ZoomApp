@@ -5,8 +5,10 @@ import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
@@ -20,17 +22,31 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     private EditText dateView;
     private int mHour;
     private int mMinute;
+    private StoreList s;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
         getSupportActionBar().hide();
         Helper.setBlackStatus(this);
+        s=StoreList.getInstance();
+
         timeView=(EditText) findViewById(R.id.apptTimeView);
         dateView=(EditText) findViewById(R.id.apptDateView);
-
+        setSpinners();
         myCalendar = Calendar.getInstance();
         showDatePickerDialog();
 
+    }
+    public void setSpinners()
+    {
+        Spinner storeDropDown = (Spinner)findViewById(R.id.storeDropMenu);
+        String[] names=new String[s.getStores().size()];
+        for(int i=0; i<s.getStores().size();i++)
+        {
+            names[i]=s.getStores().get(i).getName();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, names);
+        storeDropDown.setAdapter(adapter);
     }
     public void showTimePickerDialog(View v) {
         TimePickerFragment newFragment = new TimePickerFragment();
