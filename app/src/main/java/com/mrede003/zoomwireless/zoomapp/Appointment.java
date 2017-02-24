@@ -20,6 +20,14 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class Appointment extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+    private int mHour;
+    private int mMinute;
+    private String selectedStore;
+    private String selectedRep;
+    private String managerName;
+    private String managerEmail;
+    private String emailSubject;
+    private String emailBody;
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
     private EditText timeView;
@@ -27,13 +35,13 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     private EditText nameView;
     private EditText phoneView;
     private EditText textArea;
-    private int mHour;
-    private int mMinute;
-    private String selectedStore;
-    private String selectedRep;
     private StoreList s;
     private Spinner storeDropDown;
     private Spinner repDropDown;
+
+    private final String fromEmail="mrede003@gmail.com";
+    private final String fromPassword="Eddieboy45#";
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
@@ -51,6 +59,8 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         dateView=(EditText) findViewById(R.id.apptDateView);
         selectedStore="";
         selectedRep="";
+        managerName="";
+        managerEmail="";
         setSpinners();
         myCalendar = Calendar.getInstance();
         showDatePickerDialog();
@@ -77,6 +87,7 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
             public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
                 if(i!=0) {
                     selectedStore = adapter.getItemAtPosition(i).toString();
+
                     setRepDropDown(i);
                 }else{
                     selectedStore="";
@@ -94,7 +105,9 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         ArrayList<String> staff=new ArrayList<>();
         staff.clear();
         staff.add(0, "Please Select a Rep");
-        staff.add(1,s.getStores().get(i-1).getManagerName()+" (Store Manager)");
+        managerName=s.getStores().get(i-1).getManagerName();
+        managerEmail=s.getStores().get(i-1).getEmail();
+        staff.add(1,managerName+" (Store Manager)");
         staff.addAll(s.getStores().get(i-1).getStaff());
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, staff);
         repDropDown.setAdapter(adapter2);
@@ -155,8 +168,29 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
             Helper.displayCenterToast(this, "Please give a brief description for you visit.", Toast.LENGTH_SHORT);
             return;
         }
-
-
+        emailSubject="AUTOMATED: Requested Appointment with "+nameView.getText().toString()+" via the ZOOMApp";
+        emailBody="Hello "+managerName+",\n" +
+                "\n" +
+                "\tAn appointment at your store location "+selectedStore+" has been\n" +
+                "requested. Please call the customer ASAP to confirm or deny their request.\n" +
+                "\n" +
+                "NAME: "+nameView.getText().toString()+"\n" +
+                "MTN: "+phoneView.getText().toString()+"\n" +
+                "Requested Rep: "+selectedRep+"\n" +
+                "Requested Date: "+dateView.getText().toString()+"\n" +
+                "Requested Time: "+timeView.getText().toString()+"\n" +
+                "Reason: "+textArea.getText().toString()+"\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "---------------------------------------------------------------------------- \n" +
+                "This is an automated message sent by the Zoom Wireless App (TM).";
+        ArrayList<String> toEmailList=new ArrayList<>();
+        toEmailList.clear();
+        toEmailList.add(managerEmail);
+        new SendMailTask(this).execute(fromEmail,
+                fromPassword, toEmailList, emailSubject, emailBody);
 
     }
 

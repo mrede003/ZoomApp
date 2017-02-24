@@ -34,7 +34,7 @@
         android:id="@+id/expDateView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textSize="15dp"
         android:textAlignment="center"
         android:background="@drawable/textviewborder"
         android:textStyle="normal|bold" />
