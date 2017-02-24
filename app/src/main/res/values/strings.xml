@@ -8,4 +8,7 @@
     <string name="name_view_hint">First and Last Name</string>
     <string name="time_view_hint">Time</string>
     <string name="date_view_hint">Date</string>
+    <string name="phone_view_hint">Phone Number</string>
+    <string name="apptDescriptionHint">"Please give a brief description of the reason of your appointment...."</string>
+    <string name="apptRequestButton">"Request Appointment"</string>
 </resources>

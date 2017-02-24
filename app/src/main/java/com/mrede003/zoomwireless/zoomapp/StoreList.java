@@ -45,6 +45,7 @@ public class StoreList {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Store value=dataSnapshot.getValue(Store.class);
+                value.getStaff().remove(0);     //cheap fix, need to figure out why firebase is bringing in null for first value in staff list
                 stores.add(value);
             }
 

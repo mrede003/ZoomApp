@@ -4,14 +4,18 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -20,9 +24,16 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     private DatePickerDialog.OnDateSetListener date;
     private EditText timeView;
     private EditText dateView;
+    private EditText nameView;
+    private EditText phoneView;
+    private EditText textArea;
     private int mHour;
     private int mMinute;
+    private String selectedStore;
+    private String selectedRep;
     private StoreList s;
+    private Spinner storeDropDown;
+    private Spinner repDropDown;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
@@ -30,8 +41,16 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         Helper.setBlackStatus(this);
         s=StoreList.getInstance();
 
+        nameView= (EditText)findViewById(R.id.apptNameView);
+        phoneView=(EditText)findViewById(R.id.apptPhoneView);
+        textArea=(EditText)findViewById(R.id.apptDescriptionText);
+        storeDropDown = (Spinner)findViewById(R.id.storeDropMenu);
+        repDropDown = (Spinner)findViewById(R.id.employeeDropMenu);
+        nameView.setInputType(InputType.TYPE_CLASS_TEXT);
         timeView=(EditText) findViewById(R.id.apptTimeView);
         dateView=(EditText) findViewById(R.id.apptDateView);
+        selectedStore="";
+        selectedRep="";
         setSpinners();
         myCalendar = Calendar.getInstance();
         showDatePickerDialog();
@@ -39,19 +58,106 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     }
     public void setSpinners()
     {
-        Spinner storeDropDown = (Spinner)findViewById(R.id.storeDropMenu);
-        String[] names=new String[s.getStores().size()];
+        String[] makeSelection=new String[1];
+        makeSelection[0]="Please Choose a Store First";
+        repDropDown.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, makeSelection));
+
+        ArrayList<String> names=new ArrayList<>();
+        names.add("Please Select a Store");
         for(int i=0; i<s.getStores().size();i++)
         {
-            names[i]=s.getStores().get(i).getName();
+            names.add(s.getStores().get(i).getName());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, names);
         storeDropDown.setAdapter(adapter);
+        storeDropDown.setSelection(0, false);
+        storeDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
+                if(i!=0) {
+                    selectedStore = adapter.getItemAtPosition(i).toString();
+                    setRepDropDown(i);
+                }else{
+                    selectedStore="";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView)
+            {
+
+            }
+        });
+    }
+    public void setRepDropDown(int i)
+    {
+        ArrayList<String> staff=new ArrayList<>();
+        staff.clear();
+        staff.add(0, "Please Select a Rep");
+        staff.add(1,s.getStores().get(i-1).getManagerName()+" (Store Manager)");
+        staff.addAll(s.getStores().get(i-1).getStaff());
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, staff);
+        repDropDown.setAdapter(adapter2);
+        repDropDown.setSelection(0, false);
+        repDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
+                if(i!=0) {
+                    selectedRep = adapter.getItemAtPosition(i).toString();
+                }else{
+                    selectedRep="";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView)
+            {
+
+            }
+        });
+
     }
     public void showTimePickerDialog(View v) {
         TimePickerFragment newFragment = new TimePickerFragment();
         String tag="tag";
         newFragment.show(getSupportFragmentManager(), tag);
+    }
+    public void setAppointment(View view)
+    {
+        if(nameView.getText().toString().equals(null)||nameView.getText().toString().equals("")) {
+            Helper.displayCenterToast(this, "Please enter your first and last name above.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(dateView.getText().toString().equals(null)||dateView.getText().toString().equals("")) {
+            Helper.displayCenterToast(this, "Please select a date above.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(phoneView.getText().toString().equals(null)||phoneView.getText().toString().equals("")
+                ||phoneView.getText().toString().length()<10) {
+            Helper.displayCenterToast(this, "Please enter your 10 digit phone number.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(timeView.getText().toString().equals(null)||timeView.getText().toString().equals("")) {
+            Helper.displayCenterToast(this, "Please select a desired time.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(selectedStore.equals(null)||selectedStore.equals(""))
+        {
+            Helper.displayCenterToast(this, "Please select a desired store.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(selectedRep.equals(null)||selectedRep.equals(""))
+        {
+            Helper.displayCenterToast(this, "Please select a desired representative.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(textArea.getText().toString().equals(null)||textArea.getText().toString().equals("")) {
+            Helper.displayCenterToast(this, "Please give a brief description for you visit.", Toast.LENGTH_SHORT);
+            return;
+        }
+
+
+
     }
 
     @Override
