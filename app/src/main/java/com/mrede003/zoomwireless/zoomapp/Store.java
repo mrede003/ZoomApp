@@ -12,6 +12,7 @@ public class Store {
     private String email;
     private String address;
     private String name;
+    private String storeImg;
 
     public Store()
     {
@@ -20,14 +21,16 @@ public class Store {
         email="";
         address="";
         name="";
+        storeImg="";
     }
-    public Store(String address, String name, String managerName, String email, ArrayList<String>  staff)
+    public Store(String address, String name, String managerName, String email, ArrayList<String>  staff, String storeImg)
     {
         this.address=address;
         this.name=name;
         this.staff=staff;
         this.managerName=managerName;
         this.email=email;
+        this.storeImg=storeImg;
     }
     public ArrayList<String> getStaff() {
         return staff;
@@ -48,6 +51,10 @@ public class Store {
     public String getName() {
         return name;
     }
+    public String getStoreImg() {
+        return storeImg;
+    }
+
 
     public void setStaff(ArrayList<String> staff) {
         this.staff = staff;
@@ -69,4 +76,7 @@ public class Store {
         this.name = name;
     }
 
+    public void setStoreImg(String storeImg) {
+        this.storeImg = storeImg;
+    }
 }

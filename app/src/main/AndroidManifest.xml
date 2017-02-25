@@ -32,7 +32,8 @@
         <activity
             android:name=".PromoDisplay"
             android:screenOrientation="portrait" />
-        <activity android:name=".Appointment"></activity>
+        <activity android:name=".Appointment" />
+        <activity android:name=".Locations"></activity>
     </application>
 
 </manifest>

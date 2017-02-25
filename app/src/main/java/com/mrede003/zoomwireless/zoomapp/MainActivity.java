@@ -25,5 +25,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this, Appointment.class);
         startActivity(intent);
     }
+    public void openLocations(View view)
+    {
+        Intent intent=new Intent(this, Locations.class);
+        startActivity(intent);
+    }
+
 
 }
