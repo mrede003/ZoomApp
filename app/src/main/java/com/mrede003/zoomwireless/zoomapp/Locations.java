@@ -6,16 +6,14 @@ import android.widget.ListView;
 
 public class Locations extends AppCompatActivity {
     private ListView locationList;
-    private StoreList s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
         locationList=(ListView) findViewById(R.id.locationList);
-
-        s=StoreList.getInstance();
-        LazyAdapter lazy=new LazyAdapter(this,s.getStores());
-        locationList.setAdapter(lazy);
+        getSupportActionBar().hide();
         Helper.setBlackStatus(this);
+        LazyAdapter lazy=new LazyAdapter(this,StoreList.getInstance().getStores());
+        locationList.setAdapter(lazy);
     }
 }

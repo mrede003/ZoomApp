@@ -36,9 +36,7 @@ public class PromoDisplay extends AppCompatActivity {
             IMG_NAME =(String) b.get("IMG_NAME");
         }
         TextView descriptionView= (TextView) findViewById(R.id.promoDescriptionView);
-        TextView expView= (TextView) findViewById(R.id.expDateView);
-        descriptionView.setText(DESCRIPTION);
-        expView.setText("Expires: "+EXP_DATE);
+        descriptionView.setText(DESCRIPTION+"\n\nExpires: "+EXP_DATE);
         changePic();
     }
     public void changePic()

@@ -10,8 +10,8 @@
 
         <ImageView
             android:id="@+id/list_image"
-            android:layout_width="50dip"
-            android:layout_height="50dip"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
             android:padding="3dip"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="5dip"/>
@@ -24,10 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/list_image"
         android:layout_toRightOf="@+id/list_image"
-        android:text="Cedar Road Zoom/Tcc"
         android:textColor="#040404"
         android:typeface="sans"
-        android:textSize="15dip"
+        android:textSize="25dip"
         android:textStyle="bold"/>
 
     <!-- Artist Name -->
@@ -37,23 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:textColor="#343434"
-        android:textSize="10dip"
+        android:textSize="15dip"
         android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/list_image"
-        android:text="Just gona stand there and ..." />
+        android:layout_toRightOf="@+id/list_image" />
 
-    <!-- Rightend Duration -->
-    <TextView
-        android:id="@+id/duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/title"
-        android:gravity="right"
-        android:layout_marginRight="5dip"
-        android:textSize="10dip"
-        android:textColor="#10bcc9"
-        android:textStyle="bold"/>
+
 
     <!-- Rightend Arrow -->
     <ImageView android:layout_width="wrap_content"

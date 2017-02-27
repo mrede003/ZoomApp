@@ -9,12 +9,14 @@ public class PromoObj {
     private String name;
     private String description;
     private String expDate;
+    private String previewImg;
 
-    public PromoObj(String name, String imgName, String expDate, String description) {
+    public PromoObj(String name, String imgName, String expDate, String description, String previewImg) {
         this.imgName = imgName;
         this.name = name;
         this.description = description;
         this.expDate = expDate;
+        this.previewImg=previewImg;
     }
 
     public PromoObj() {
@@ -22,6 +24,7 @@ public class PromoObj {
         name = "";
         description = "";
         expDate = "";
+        previewImg="";
     }
 
     public void setImgName(String img) {
@@ -40,6 +43,11 @@ public class PromoObj {
         expDate = exp;
     }
 
+    public void setPreviewImg(String previewImg) {
+        this.previewImg = previewImg;
+    }
+
+
     public String getImgName()
     {
         return imgName;
@@ -55,6 +63,9 @@ public class PromoObj {
     public String getExpDate()
     {
         return expDate;
+    }
+    public String getPreviewImg() {
+        return previewImg;
     }
 }
 

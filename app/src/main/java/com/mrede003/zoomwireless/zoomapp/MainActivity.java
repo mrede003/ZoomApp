@@ -7,12 +7,14 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     private StoreList s;
+    private PromoObjList p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         s=StoreList.getInstance();
+        p=PromoObjList.getInstance();
         Helper.setBlackStatus(this);
     }
     public void openPromos(View view)

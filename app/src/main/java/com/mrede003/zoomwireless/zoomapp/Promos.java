@@ -1,5 +1,6 @@
 package com.mrede003.zoomwireless.zoomapp;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 
-public class Promos extends ListActivity {
+public class Promos extends Activity {
 
-    private final String promoRef="promos";
-    private ArrayList<String> nameList=new ArrayList<>();
-    private ArrayList<PromoObj> promoList=new ArrayList<>();
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    private ArrayList<PromoObj> promoList;
     private ListView lv;
 
     @Override
@@ -31,51 +28,20 @@ public class Promos extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promos);
         Helper.setBlackStatus(this);
-
+        promoList=PromoObjList.getInstance().getPromos();
+        lv= (ListView) findViewById(R.id.promoListView);
         setListViewFire();
         setPromoImage();
     }
     public void setListViewFire()
     {
-        final ArrayAdapter<String> adapter=new ArrayAdapter<>(getListView().getContext(),
-                R.layout.custom_textview, nameList);
-        getListView().setAdapter(adapter);
-        database=FirebaseDatabase.getInstance();
-        myRef = database.getReference(promoRef);
-        myRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                PromoObj value=dataSnapshot.getValue(PromoObj.class);
-                promoList.add(value);
-                nameList.add(value.getName());
-                adapter.notifyDataSetChanged();
-            }
+        LazyPromoAdapter lazy=new LazyPromoAdapter(this,PromoObjList.getInstance().getPromos());
+        lv.setAdapter(lazy);
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     public void setPromoImage()
     {
-        lv= (ListView) findViewById(android.R.id.list);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,

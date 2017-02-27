@@ -1,56 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_promo_display"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/back"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.mrede003.zoomwireless.zoomapp.PromoDisplay">
 
-    <ImageView
-        android:id="@+id/promoImage"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
 
-    <TextView
-        android:id="@+id/promoDescriptionView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/promoImage"
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:background="@drawable/textviewborder"/>
-    <Space
-        android:id="@+id/promoDisplaySpace"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"/>
-    <TextView
-        android:id="@+id/expDateView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textAlignment="center"
-        android:background="@drawable/textviewborder"
-        android:textStyle="normal|bold" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#c6c9ce">
+        android:layout_alignParentTop="true"
+        android:background="@drawable/textviewborder">
+        <ImageView
+            android:id="@+id/promoImage"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/promoDescriptionView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/promoImage"
+            android:textSize="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/trans_black">
 
         <TextView
             android:id="@+id/sharePromoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Interested?"
-            android:textSize="25dp"
-            android:textColor="@android:color/black"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,4 +67,4 @@
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
