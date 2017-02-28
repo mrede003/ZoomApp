@@ -20,7 +20,6 @@
         android:focusableInTouchMode="true"
         android:weightSum="1">
 
-
         <TextView
             android:text="@string/schedule_title"
             android:layout_width="wrap_content"
