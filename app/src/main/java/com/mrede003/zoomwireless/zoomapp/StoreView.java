@@ -20,13 +20,13 @@ public class StoreView extends AppCompatActivity {
     public void setAddressBar()
     {
         final ImageView iv = (ImageView)findViewById(R.id.storeViewMainImg);
-        final TextView tv = (TextView)findViewById(R.id.storeViewTitle);
+        //final TextView tv = (TextView)findViewById(R.id.storeViewTitle);
         final TextView tv2= (TextView)findViewById(R.id.storeViewAddress);
         ViewTreeObserver vto = iv.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             public boolean onPreDraw() {
                 iv.getViewTreeObserver().removeOnPreDrawListener(this);
-                int height = iv.getMeasuredHeight()+tv.getMeasuredHeight();
+                int height = iv.getMeasuredHeight();
                 height=height-tv2.getMeasuredHeight();
                 RelativeLayout.LayoutParams parameter =  (RelativeLayout.LayoutParams) tv2.getLayoutParams();
                 parameter.setMargins(parameter.leftMargin, height, parameter.rightMargin, parameter.bottomMargin); // left, top, right, bottom

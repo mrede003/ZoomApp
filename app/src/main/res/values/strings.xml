@@ -11,4 +11,22 @@
     <string name="phone_view_hint">Phone Number</string>
     <string name="apptDescriptionHint">"Please give a brief description of the reason of your appointment...."</string>
     <string name="apptRequestButton">"Request Appointment"</string>
+    <string name="weekHours">9AM  -  8PM</string>
+    <string name="sunHours">11AM  -  6PM</string>
+    <string name="storeHours">Store Hours</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="service1">\u2022 Tech Support</string>
+    <string name="service2">\u2022 Billing Issues</string>
+    <string name="service3">\u2022 Content Transfer</string>
+    <string name="service4">\u2022 Business Support</string>
+    <string name="service5">\u2022 FIOS New Install</string>
+    <string name="service6">\u2022 Phone Upgrade</string>
+    <string name="service7">\u2022 Phone New Act.</string>
+    <string name="service8">\u2022 Mobile Internet</string>
 </resources>
