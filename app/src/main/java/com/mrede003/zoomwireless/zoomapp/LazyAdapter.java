@@ -56,7 +56,7 @@ public class LazyAdapter extends BaseAdapter {
         title.setText(theList.get(position).getName());
         artist.setText(theList.get(position).getAddress());
         Picasso.with(activity)
-                .load(theList.get(position).getStoreImg())
+                .load(theList.get(position).getStoreImgPre())
                 .into(thumb_image);
         return vi;
     }

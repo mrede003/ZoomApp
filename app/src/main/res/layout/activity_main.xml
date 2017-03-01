@@ -107,8 +107,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="bottom|center"
-            android:onClick="openStore"/>
+            android:gravity="bottom|center"/>
         <Button
             android:id="@+id/rateButton"
             android:background="@drawable/rate_us"
@@ -117,8 +116,6 @@
             android:layout_height="wrap_content"
             android:gravity="bottom|center"/>
 
-
     </LinearLayout>
-
 
 </RelativeLayout>

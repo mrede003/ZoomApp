@@ -32,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this, Locations.class);
         startActivity(intent);
     }
-    public void openStore(View view)
-    {
-        Intent intent=new Intent(this, StoreView.class);
-        startActivity(intent);
-    }
 
 
 }

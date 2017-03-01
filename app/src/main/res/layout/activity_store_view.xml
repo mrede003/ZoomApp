@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.mrede003.zoomwireless.zoomapp.StoreView">
 
 
@@ -19,7 +18,6 @@
         android:id="@+id/storeViewAddress"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="2861 Lynnhaven Drive Suite 107, Virginia Beach VA 23451"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +33,7 @@
         android:fillViewport="true">
 
         <RelativeLayout
-            android:layout_width="300dp"
+            android:layout_width="325dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content">
 
@@ -88,11 +86,11 @@
 
                     />
                 <TextView
+                    android:id="@+id/storeViewBio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:minLines="4"
-                    android:text="Located at the corner N. Great Neck Road and Lynnhaven Drive in the Marina Shores Shopping Center. Zoom Wireless Marina is focused on meeting customer needs and exceeding expectations."
                     android:textSize="15sp"
                     android:textColor="@color/black"
                     />
@@ -424,6 +422,88 @@
                     android:textColor="@color/zoomRed"/>
 
             </LinearLayout>
+            <Space
+                android:layout_below="@id/storeViewHoursSat"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
         </RelativeLayout>
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/textLayout"
+        android:orientation="horizontal"
+        android:background="@drawable/trans_black"
+        android:layout_alignParentBottom="true">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Call Us!"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:layout_height="20dp"
+            android:textSize="12sp" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Directions"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:layout_height="20dp"
+            android:textSize="12sp" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="20dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/buttonLayout"
+        android:layout_above="@id/textLayout"
+        android:orientation="horizontal"
+        android:background="@drawable/trans_black">
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+            />
+        <Button
+            android:background="@drawable/phone"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+            android:onClick="callStore"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"/>
+        <Button
+            android:background="@drawable/navigate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+            android:onClick="navigate"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"/>
+
+    </LinearLayout>
 </RelativeLayout>
