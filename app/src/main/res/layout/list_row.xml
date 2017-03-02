@@ -32,20 +32,34 @@
     <!-- Artist Name -->
     <TextView
         android:id="@+id/artist"
-        android:layout_width="fill_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:textColor="#343434"
-        android:textSize="15dip"
+        android:textSize="15sp"
         android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/list_image" />
+        android:layout_toRightOf="@+id/list_image"/>
 
-
+    <TextView
+        android:id="@+id/distanceAway"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/title"
+        android:gravity="right"
+        android:text="N/A"
+        android:layout_marginRight="5dip"
+        android:textSize="10dip"
+        android:textColor="@color/zoomRed"
+        android:textStyle="bold"/>
 
     <!-- Rightend Arrow -->
-    <ImageView android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/list_arrow"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/quantum_ic_play_arrow_grey600_36"
+        android:layout_toRightOf="@id/artist"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
 

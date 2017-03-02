@@ -1,20 +1,16 @@
 package com.mrede003.zoomwireless.zoomapp;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import im.delight.android.location.SimpleLocation;
 
 public class PromoDisplay extends AppCompatActivity {
     private String IMG_NAME;
@@ -46,6 +42,10 @@ public class PromoDisplay extends AppCompatActivity {
                 .load(IMG_NAME)
             .into(imageView);
     }
-
+    public void showLocations(View view)
+    {
+        Intent intent=new Intent(this, Locations.class);
+        startActivity(intent);
+    }
 
 }

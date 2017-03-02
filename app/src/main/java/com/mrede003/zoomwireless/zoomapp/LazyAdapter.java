@@ -27,6 +27,7 @@ public class LazyAdapter extends BaseAdapter {
     public LazyAdapter(Activity a, ArrayList<Store> theList) {
         this.theList=theList;
         activity = a;
+        StoreList.getInstance().setDistanceAway(activity);
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -50,9 +51,17 @@ public class LazyAdapter extends BaseAdapter {
         TextView title = (TextView)vi.findViewById(R.id.title); // title
         TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
+        TextView distanceAway=(TextView) vi.findViewById(R.id.distanceAway);
 
         // Setting all values in listview
-
+        String distance="";
+        if(theList.get(position).getMilesAway()==-1.0)
+        {
+            distance="N/A";
+        }else{
+            distance = String.format("%.2f", theList.get(position).getMilesAway());
+        }
+        distanceAway.setText(distance+" miles");
         title.setText(theList.get(position).getName());
         artist.setText(theList.get(position).getAddress());
         Picasso.with(activity)

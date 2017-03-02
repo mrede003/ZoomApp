@@ -16,6 +16,9 @@ public class Store {
     private String bio;
     private String storeImgPre;
     private String phoneNumber;
+    private Double latitude;
+    private Double longitude;
+    private Double milesAway;
 
     public Store()
     {
@@ -28,9 +31,12 @@ public class Store {
         bio="";
         storeImgPre="";
         phoneNumber="";
+        latitude=-1.0;
+        longitude=-1.0;
+        milesAway=-1.0;
     }
     public Store(String address, String name, String managerName, String email, ArrayList<String>  staff,
-                 String storeImg, String bio, String storeImgPre, String phoneNumber)
+                 String storeImg, String bio, String storeImgPre, String phoneNumber,Double latitude, Double longitude)
     {
         this.address=address;
         this.name=name;
@@ -41,6 +47,9 @@ public class Store {
         this.bio=bio;
         this.storeImgPre=storeImgPre;
         this.phoneNumber=phoneNumber;
+        this.latitude=latitude;
+        this.longitude=longitude;
+        milesAway=-1.0;
     }
     public ArrayList<String> getStaff() {
         return staff;
@@ -68,6 +77,15 @@ public class Store {
     }
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+    public Double getLatitude() {
+        return latitude;
+    }
+    public Double getLongitude() {
+        return longitude;
+    }
+    public Double getMilesAway() {
+        return milesAway;
     }
 
 
@@ -98,5 +116,13 @@ public class Store {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+    public void setMilesAway(Double milesAway) {
+        this.milesAway = milesAway;
+    }
 }
