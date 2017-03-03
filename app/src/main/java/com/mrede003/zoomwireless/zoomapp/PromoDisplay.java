@@ -44,6 +44,7 @@ public class PromoDisplay extends AppCompatActivity {
     }
     public void showLocations(View view)
     {
+        Helper.setCurrentLocation(this);
         Intent intent=new Intent(this, Locations.class);
         startActivity(intent);
     }

@@ -1,5 +1,8 @@
 package com.mrede003.zoomwireless.zoomapp;
 
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,10 +19,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-public class LazyAdapter extends BaseAdapter {
+public class LazyAdapter extends BaseAdapter{
     private Activity activity;
     private static LayoutInflater inflater=null;
     private ArrayList<Store> theList;
@@ -27,7 +31,7 @@ public class LazyAdapter extends BaseAdapter {
     public LazyAdapter(Activity a, ArrayList<Store> theList) {
         this.theList=theList;
         activity = a;
-        StoreList.getInstance().setDistanceAway(activity);
+
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -69,5 +73,6 @@ public class LazyAdapter extends BaseAdapter {
                 .into(thumb_image);
         return vi;
     }
+
 }
 

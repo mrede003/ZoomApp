@@ -1,7 +1,18 @@
 package com.mrede003.zoomwireless.zoomapp;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -18,10 +29,12 @@ import im.delight.android.location.SimpleLocation;
  * Created by mrede003 on 2/21/17.
  */
 
-public class StoreList {
+public class StoreList{
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private static StoreList singleton;
+    private double latitude;
+    private double longitude;
     private ArrayList<Store> stores;
 
     /* A private Constructor prevents any other
@@ -30,6 +43,8 @@ public class StoreList {
     private StoreList() {
         stores=new ArrayList<>();
         fireBaseDown();
+        latitude=-1.0;
+        longitude=-1.0;
     }
 
     /* Static 'instance' method */
@@ -43,6 +58,12 @@ public class StoreList {
     {
         return stores;
     }
+    public void setLongLat(double latitude, double longitude, Context context)
+    {
+        this.latitude=latitude;
+        this.longitude=longitude;
+        setDistanceAway(context);
+     }
     private void fireBaseDown()
     {
         database=FirebaseDatabase.getInstance();
@@ -76,26 +97,18 @@ public class StoreList {
             }
         });
     }
+
     public void setDistanceAway(Context context)
     {
-        LocationManager lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled=true;
-        try {
-            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch(Exception ex) {}
-
-        if(!gps_enabled) return;
         SimpleLocation location = new SimpleLocation(context);
-        location.beginUpdates();
-        final double latitude = location.getLatitude();
-        final double longitude = location.getLongitude();
-        if(latitude==0.0&&longitude==0.0) return;
+        if((latitude==0.0&&longitude==0.0)||
+            latitude==-1.0&&longitude==-1.0)return;
+
         for(int i=0; i<stores.size(); i++) {
             double x = location.calculateDistance(latitude, longitude, stores.get(i).getLatitude(),
                     stores.get(i).getLongitude());
             stores.get(i).setMilesAway(x/1609.34);
         }
-        location.endUpdates();
 
         //insertion sort cause its I cant imagine he'll ever have more than 1000 stores.
 
@@ -109,6 +122,5 @@ public class StoreList {
                 }
             }
         }
-
     }
 }
