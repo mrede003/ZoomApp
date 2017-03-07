@@ -2,9 +2,10 @@ package com.mrede003.zoomwireless.zoomapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,8 +33,11 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     private DatePickerDialog.OnDateSetListener date;
     private EditText timeView;
     private EditText dateView;
-    private EditText nameView;
-    private EditText phoneView;
+    private EditText firstNameView;
+    private EditText lastNameView;
+    private EditText firstPhoneView;
+    private EditText middlePhoneView;
+    private EditText lastPhoneView;
     private EditText textArea;
     private StoreList s;
     private Spinner storeDropDown;
@@ -49,12 +53,14 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         Helper.setBlackStatus(this);
         s=StoreList.getInstance();
 
-        nameView= (EditText)findViewById(R.id.apptNameView);
-        phoneView=(EditText)findViewById(R.id.apptPhoneView);
+        firstNameView= (EditText)findViewById(R.id.apptFirstNameView);
+        lastNameView= (EditText)findViewById(R.id.apptLastNameView);
+        firstPhoneView=(EditText)findViewById(R.id.areaCodeText);
+        middlePhoneView=(EditText)findViewById(R.id.prefixNumberText);
+        lastPhoneView=(EditText)findViewById(R.id.lastNumberText);
         textArea=(EditText)findViewById(R.id.apptDescriptionText);
         storeDropDown = (Spinner)findViewById(R.id.storeDropMenu);
         repDropDown = (Spinner)findViewById(R.id.employeeDropMenu);
-        nameView.setInputType(InputType.TYPE_CLASS_TEXT);
         timeView=(EditText) findViewById(R.id.apptTimeView);
         dateView=(EditText) findViewById(R.id.apptDateView);
         selectedStore="";
@@ -64,6 +70,49 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         setSpinners();
         myCalendar = Calendar.getInstance();
         showDatePickerDialog();
+        textArea.setSingleLine(false);
+        firstPhoneView.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start,int before, int count)
+            {
+                // TODO Auto-generated method stub
+                if(firstPhoneView.getText().toString().length()==3)     //size as per your requirement
+                {
+                    middlePhoneView.requestFocus();
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+        });
+        middlePhoneView.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start,int before, int count)
+            {
+                // TODO Auto-generated method stub
+                if(middlePhoneView.getText().toString().length()==3)     //size as per your requirement
+                {
+                    lastPhoneView.requestFocus();
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+        });
 
     }
     public void setSpinners()
@@ -76,7 +125,7 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         names.add("Please Select a Store");
         for(int i=0; i<s.getStores().size();i++)
         {
-            names.add(s.getStores().get(i).getName());
+            names.add(s.getStores().get(i).getAddress());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, names);
         storeDropDown.setAdapter(adapter);
@@ -137,17 +186,31 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     }
     public void setAppointment(View view)
     {
-        if(nameView.getText().toString().equals(null)||nameView.getText().toString().equals("")) {
-            Helper.displayCenterToast(this, "Please enter your first and last name above.", Toast.LENGTH_SHORT);
+        if(firstNameView.getText().toString().equals(null)||firstNameView.getText().toString().equals("")) {
+            Helper.displayCenterToast(this, "Please enter your first name above", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(lastNameView.getText().toString().equals(null)||lastNameView.getText().toString().equals("")) {
+            Helper.displayCenterToast(this, "Please enter your last name above", Toast.LENGTH_SHORT);
             return;
         }
         if(dateView.getText().toString().equals(null)||dateView.getText().toString().equals("")) {
             Helper.displayCenterToast(this, "Please select a date above.", Toast.LENGTH_SHORT);
             return;
         }
-        if(phoneView.getText().toString().equals(null)||phoneView.getText().toString().equals("")
-                ||phoneView.getText().toString().length()<10) {
-            Helper.displayCenterToast(this, "Please enter your 10 digit phone number.", Toast.LENGTH_SHORT);
+        if(firstPhoneView.getText().toString().equals(null)||firstPhoneView.getText().toString().equals("")
+                ||firstPhoneView.getText().toString().length()!=3) {
+            Helper.displayCenterToast(this, "Please enter your area code above.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(middlePhoneView.getText().toString().equals(null)||middlePhoneView.getText().toString().equals("")
+                ||middlePhoneView.getText().toString().length()!=3) {
+            Helper.displayCenterToast(this, "Please enter the prefix to your phone number above.", Toast.LENGTH_SHORT);
+            return;
+        }
+        if(lastPhoneView.getText().toString().equals(null)||lastPhoneView.getText().toString().equals("")
+                ||lastPhoneView.getText().toString().length()!=4) {
+            Helper.displayCenterToast(this, "Please enter the last 4 of your phone number above.", Toast.LENGTH_SHORT);
             return;
         }
         if(timeView.getText().toString().equals(null)||timeView.getText().toString().equals("")) {
@@ -168,14 +231,14 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
             Helper.displayCenterToast(this, "Please give a brief description for you visit.", Toast.LENGTH_SHORT);
             return;
         }
-        emailSubject="AUTOMATED: Requested Appointment with "+nameView.getText().toString()+" via the ZOOMApp";
+        emailSubject="AUTOMATED: Requested Appointment with "+firstNameView.getText().toString()+" "+lastNameView.getText().toString()+" via the ZOOMApp";
         emailBody="Hello "+managerName+",\n" +
                 "\n" +
                 "\tAn appointment at your store location "+selectedStore+" has been\n" +
                 "requested. Please call the customer ASAP to confirm or deny their request.\n" +
                 "\n" +
-                "NAME: "+nameView.getText().toString()+"\n" +
-                "MTN: "+phoneView.getText().toString()+"\n" +
+                "NAME: "+firstNameView.getText().toString()+" "+lastNameView.getText().toString()+"\n" +
+                "MTN: "+firstPhoneView.getText().toString()+middlePhoneView.getText().toString()+lastPhoneView.getText().toString()+"\n" +
                 "Requested Rep: "+selectedRep+"\n" +
                 "Requested Date: "+dateView.getText().toString()+"\n" +
                 "Requested Time: "+timeView.getText().toString()+"\n" +
@@ -189,6 +252,7 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         ArrayList<String> toEmailList=new ArrayList<>();
         toEmailList.clear();
         toEmailList.add(managerEmail);
+        toEmailList.addAll(CompanyList.getInstance().getCompany().getApptEmails());
         new SendMailTask(this).execute(fromEmail,
                 fromPassword, toEmailList, emailSubject, emailBody);
 

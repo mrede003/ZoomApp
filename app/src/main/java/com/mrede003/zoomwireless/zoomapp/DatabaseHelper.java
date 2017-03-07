@@ -11,10 +11,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper{
-    private static final String DATABASE_NAME="promos.db";
-    private static final String TABLE_NAME="promo_table";
+    private static final String DATABASE_NAME="notifications.db";
+    private static final String TABLE_NAME="notifications_table";
     private static final String COL_1="ID";
-    private static final String COL_2="NAME";
+    private static final String COL_2="TITLE";
+    private static final String COL_3="BODY";
+    private static final String COL_4="DATE";
 
     private static DatabaseHelper sInstance;
     private SQLiteDatabase db;

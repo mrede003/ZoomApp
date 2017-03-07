@@ -2,8 +2,8 @@ package com.mrede003.zoomwireless.zoomapp;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -20,6 +20,15 @@ public class StoreView extends AppCompatActivity {
     private String IMG_NAME;
     private String ADDRESS;
     private String PHONE_NUMBER;
+    private String GOOGLE_RATE_LINK;
+
+    private TextView mon;
+    private TextView tues;
+    private TextView wed;
+    private TextView thur;
+    private TextView fri;
+    private TextView sat;
+    private TextView sun;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +45,30 @@ public class StoreView extends AppCompatActivity {
             ADDRESS=(String) b.get("ADDRESS");
             IMG_NAME =(String) b.get("IMG_NAME");
             PHONE_NUMBER=(String) b.get("PHONE_NUMBER");
+            GOOGLE_RATE_LINK=(String) b.get("GOOGLE_RATE_LINK");
         }
+        mon=(TextView) findViewById(R.id.storeHoursMon);
+        tues=(TextView) findViewById(R.id.storeHoursTues);
+        wed=(TextView) findViewById(R.id.storeHoursWed);
+        thur=(TextView) findViewById(R.id.storeHoursThu);
+        fri=(TextView) findViewById(R.id.storeHoursFri);
+        sat=(TextView) findViewById(R.id.storeHoursSat);
+        sun=(TextView) findViewById(R.id.storeHoursSun);
+
+        mon.setText(CompanyList.getInstance().getCompany().getMonThursO()+" - "+
+                CompanyList.getInstance().getCompany().getMonThursC());
+        tues.setText(CompanyList.getInstance().getCompany().getMonThursO()+" - "+
+                CompanyList.getInstance().getCompany().getMonThursC());
+        wed.setText(CompanyList.getInstance().getCompany().getMonThursO()+" - "+
+                CompanyList.getInstance().getCompany().getMonThursC());
+        thur.setText(CompanyList.getInstance().getCompany().getMonThursO()+" - "+
+                CompanyList.getInstance().getCompany().getMonThursC());
+        fri.setText(CompanyList.getInstance().getCompany().getFriO()+" - "+
+                CompanyList.getInstance().getCompany().getFriC());
+        sat.setText(CompanyList.getInstance().getCompany().getSatO()+" - "+
+                CompanyList.getInstance().getCompany().getSatC());
+        sun.setText(CompanyList.getInstance().getCompany().getSunO()+" - "+
+                CompanyList.getInstance().getCompany().getSunC());
         storeMainView=(ImageView) findViewById(R.id.storeViewMainImg);
         addressBar=(TextView) findViewById(R.id.storeViewAddress);
         bio=(TextView) findViewById(R.id.storeViewBio);
@@ -74,5 +106,10 @@ public class StoreView extends AppCompatActivity {
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("google.navigation:q="+ADDRESS));
         startActivity(intent);
+    }
+    public void rate(View view)
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_RATE_LINK));
+        startActivity(browserIntent);
     }
 }

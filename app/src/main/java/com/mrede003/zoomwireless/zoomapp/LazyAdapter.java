@@ -1,27 +1,21 @@
 package com.mrede003.zoomwireless.zoomapp;
 
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 /**
  * Created by mrede003 on 2/24/17.
  */
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import android.app.Activity;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 public class LazyAdapter extends BaseAdapter{
     private Activity activity;

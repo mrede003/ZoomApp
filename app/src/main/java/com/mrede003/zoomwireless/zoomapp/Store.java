@@ -16,6 +16,7 @@ public class Store {
     private String bio;
     private String storeImgPre;
     private String phoneNumber;
+    private String googleRateLink;
     private Double latitude;
     private Double longitude;
     private Double milesAway;
@@ -31,12 +32,13 @@ public class Store {
         bio="";
         storeImgPre="";
         phoneNumber="";
+        googleRateLink="";
         latitude=-1.0;
         longitude=-1.0;
         milesAway=-1.0;
     }
     public Store(String address, String name, String managerName, String email, ArrayList<String>  staff,
-                 String storeImg, String bio, String storeImgPre, String phoneNumber,Double latitude, Double longitude)
+                 String storeImg, String bio, String storeImgPre, String phoneNumber,Double latitude, Double longitude, String googleRateLink)
     {
         this.address=address;
         this.name=name;
@@ -49,6 +51,7 @@ public class Store {
         this.phoneNumber=phoneNumber;
         this.latitude=latitude;
         this.longitude=longitude;
+        this.googleRateLink = googleRateLink;
         milesAway=-1.0;
     }
     public ArrayList<String> getStaff() {
@@ -87,6 +90,10 @@ public class Store {
     public Double getMilesAway() {
         return milesAway;
     }
+    public String getGoogleRateLink() {
+        return googleRateLink;
+    }
+
 
 
     public void setStaff(ArrayList<String> staff) {
@@ -124,5 +131,8 @@ public class Store {
     }
     public void setMilesAway(Double milesAway) {
         this.milesAway = milesAway;
+    }
+    public void setGoogleRateLink(String googleRateLink) {
+        this.googleRateLink = googleRateLink;
     }
 }

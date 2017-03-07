@@ -22,7 +22,6 @@
         android:orientation="horizontal"
         android:background="@drawable/trans_black"
         android:layout_alignParentBottom="true">
-
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -53,7 +52,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Notifications"
+            android:text="Like Us!"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:textStyle="normal|bold"
@@ -62,7 +61,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Rate Us!"
+            android:text="Follow Us!"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:textStyle="normal|bold"
@@ -102,19 +101,21 @@
             android:gravity="bottom|center"
             android:onClick="openLocations"/>
         <Button
-            android:id="@+id/notificationButton"
-            android:background="@drawable/notifications"
+            android:id="@+id/facebookButton"
+            android:background="@drawable/facebookclear"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="bottom|center"/>
+            android:gravity="bottom|center"
+            android:onClick="openFacebook"/>
         <Button
-            android:id="@+id/rateButton"
-            android:background="@drawable/rate_us"
+            android:id="@+id/twitterButton"
+            android:background="@drawable/twitter"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="bottom|center"/>
+            android:gravity="bottom|center"
+            android:onClick="openTwitter"/>
 
     </LinearLayout>
 

@@ -3,6 +3,9 @@ package com.mrede003.zoomwireless.zoomapp;
 /**
  * Created by mrede003 on 2/24/17.
  */
+
+import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Properties;
@@ -15,7 +18,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import android.util.Log;
 public class Gmail {
     final String emailPort = "587";// gmail's smtp port
     final String smtpAuth = "true";

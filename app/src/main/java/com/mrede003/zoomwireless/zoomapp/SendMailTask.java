@@ -4,12 +4,12 @@ package com.mrede003.zoomwireless.zoomapp;
  * Created by mrede003 on 2/24/17.
  */
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import java.util.List;
 
 public class SendMailTask extends AsyncTask {
 

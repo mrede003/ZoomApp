@@ -1,27 +1,29 @@
 package com.mrede003.zoomwireless.zoomapp;
-import android.*;
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import im.delight.android.location.SimpleLocation;
-
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback  {
     private boolean alreadyRan=false;
+    private static String FACEBOOK_URL = "https://www.facebook.com/joel.queen.9";
+    private static String FACEBOOK_PAGE_ID = "YourPageName";
+    private static String TWITTER_USERNAME="realdonaldtrump";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StoreList.getInstance();
         PromoObjList.getInstance();
+        CompanyList.getInstance();
         if(!alreadyRan)
         {
             try {
@@ -55,6 +57,41 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         Intent intent=new Intent(this, Locations.class);
         startActivity(intent);
     }
+    public void openFacebook(View view)
+    {
+        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+        String facebookUrl = getFacebookPageURL(this);
+        facebookIntent.setData(Uri.parse(facebookUrl));
+        startActivity(facebookIntent);
+    }
+    public String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+
+            boolean activated =  packageManager.getApplicationInfo("com.facebook.katana", 0).enabled;
+            if(activated){
+                if ((versionCode >= 3002850)) {
+                    return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                } else {
+                    return "fb://page/" + FACEBOOK_PAGE_ID;
+                }
+            }else{
+                return FACEBOOK_URL;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL;
+        }
+    }
+    public void openTwitter(View view)
+    {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + TWITTER_USERNAME)));
+        }catch (Exception e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + TWITTER_USERNAME)));
+        }
+    }
+
     public void getLocationPermission()
     {
         int permissionCheck = ContextCompat.checkSelfPermission(this,
