@@ -19,10 +19,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Gmail {
-    final String emailPort = "587";// gmail's smtp port
-    final String smtpAuth = "true";
-    final String starttls = "true";
-    final String emailHost = "smtp.gmail.com";
+    private String emailPort = "587";// gmail's smtp port
+    private String smtpAuth = "true";
+    private String starttls = "true";
+    private String emailHost = "smtp.gmail.com";
 
     String fromEmail;
     String fromPassword;
@@ -36,6 +36,11 @@ public class Gmail {
 
     public Gmail(String fromEmail, String fromPassword,
                  List toEmailList, String emailSubject, String emailBody) {
+        emailPort=CompanyList.getInstance().getCompany().getEmailPort();
+        smtpAuth=CompanyList.getInstance().getCompany().getSmtpAuth();
+        starttls=CompanyList.getInstance().getCompany().getStarttls();
+        emailHost=CompanyList.getInstance().getCompany().getEmailHost();
+
         this.fromEmail = fromEmail;
         this.fromPassword = fromPassword;
         this.toEmailList = toEmailList;

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -41,10 +42,17 @@ public class SendMailTask extends AsyncTask {
             androidEmail.createEmailMessage();
             publishProgress("Requesting Appointment....");
             androidEmail.sendEmail();
-            publishProgress("Email Sent.");
+            publishProgress("Request sent successfully");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
             Log.i("SendMailTask", "Mail Sent.");
         } catch (Exception e) {
-            publishProgress(e.getMessage());
             Log.e("SendMailTask", e.getMessage(), e);
         }
         return null;

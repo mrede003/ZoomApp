@@ -16,9 +16,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback  {
     private boolean alreadyRan=false;
-    private static String FACEBOOK_URL = "https://www.facebook.com/joel.queen.9";
-    private static String FACEBOOK_PAGE_ID = "YourPageName";
-    private static String TWITTER_USERNAME="realdonaldtrump";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StoreList.getInstance();
@@ -72,23 +69,23 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             boolean activated =  packageManager.getApplicationInfo("com.facebook.katana", 0).enabled;
             if(activated){
                 if ((versionCode >= 3002850)) {
-                    return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                    return "fb://facewebmodal/f?href=" + CompanyList.getInstance().getCompany().getFacebook_url();
                 } else {
-                    return "fb://page/" + FACEBOOK_PAGE_ID;
+                    return "fb://page/" + CompanyList.getInstance().getCompany().getFacebook_page_id();
                 }
             }else{
-                return FACEBOOK_URL;
+                return CompanyList.getInstance().getCompany().getFacebook_url();
             }
         } catch (PackageManager.NameNotFoundException e) {
-            return FACEBOOK_URL;
+            return CompanyList.getInstance().getCompany().getFacebook_url();
         }
     }
     public void openTwitter(View view)
     {
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + TWITTER_USERNAME)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + CompanyList.getInstance().getCompany().getTwitter_username())));
         }catch (Exception e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + TWITTER_USERNAME)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + CompanyList.getInstance().getCompany().getTwitter_username())));
         }
     }
 

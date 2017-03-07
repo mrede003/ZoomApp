@@ -1,7 +1,5 @@
 package com.mrede003.zoomwireless.zoomapp;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -9,18 +7,20 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
-public class Appointment extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+public class Appointment extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener{
     private int mHour;
     private int mMinute;
     private String selectedStore;
@@ -30,7 +30,6 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     private String emailSubject;
     private String emailBody;
     private Calendar myCalendar;
-    private DatePickerDialog.OnDateSetListener date;
     private EditText timeView;
     private EditText dateView;
     private EditText firstNameView;
@@ -42,9 +41,6 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
     private StoreList s;
     private Spinner storeDropDown;
     private Spinner repDropDown;
-
-    private final String fromEmail="mrede003@gmail.com";
-    private final String fromPassword="Eddieboy45#";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +65,6 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         managerEmail="";
         setSpinners();
         myCalendar = Calendar.getInstance();
-        showDatePickerDialog();
         textArea.setSingleLine(false);
         firstPhoneView.addTextChangedListener(new TextWatcher() {
 
@@ -179,11 +174,6 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         });
 
     }
-    public void showTimePickerDialog(View v) {
-        TimePickerFragment newFragment = new TimePickerFragment();
-        String tag="tag";
-        newFragment.show(getSupportFragmentManager(), tag);
-    }
     public void setAppointment(View view)
     {
         if(firstNameView.getText().toString().equals(null)||firstNameView.getText().toString().equals("")) {
@@ -253,13 +243,99 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
         toEmailList.clear();
         toEmailList.add(managerEmail);
         toEmailList.addAll(CompanyList.getInstance().getCompany().getApptEmails());
-        new SendMailTask(this).execute(fromEmail,
-                fromPassword, toEmailList, emailSubject, emailBody);
+        new SendMailTask(this).execute(CompanyList.getInstance().getCompany().getFromEmail(),
+                CompanyList.getInstance().getCompany().getFromPassword(), toEmailList, emailSubject, emailBody);
+        clearAll();
 
     }
 
+    private void clearAll()
+    {
+        firstNameView.setText("");
+        lastNameView.setText("");
+        firstPhoneView.setText("");
+        middlePhoneView.setText("");
+        lastPhoneView.setText("");
+        dateView.setText("");
+        timeView.setText("");
+        setSpinners();
+        textArea.setText("");
+    }
+    public void showTimePickerDialog(View v) {
+        if(dateView.getText().toString().equals(null)||
+                dateView.getText().toString().equals(""))
+        {
+            Toast.makeText(this,"Please select a date before selecting time!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Calendar now=Calendar.getInstance();
+        TimePickerDialog time=TimePickerDialog.newInstance(
+                this,
+                now.get(Calendar.HOUR_OF_DAY),
+                now.get(Calendar.MINUTE),
+                false
+        );
+        time.setThemeDark(true);
+        int dayOfWeek=myCalendar.get(Calendar.DAY_OF_WEEK);
+        int maxTimeHour, maxTimeMinute;
+        if(dayOfWeek==1)
+        {
+            maxTimeHour=17;
+            maxTimeMinute=30;
+            time.setMinTime(11, 0, 0);
+            time.setMaxTime(maxTimeHour, maxTimeMinute, 0);
+        }else {
+            maxTimeHour=19;
+            maxTimeMinute=30;
+            time.setMinTime(9, 0, 0);
+            time.setMaxTime(maxTimeHour, maxTimeMinute, 0);
+        }
+        if(myCalendar.get(Calendar.YEAR)==Calendar.getInstance().get(Calendar.YEAR)&&
+                myCalendar.get(Calendar.MONTH)==Calendar.getInstance().get(Calendar.MONTH)&&
+                myCalendar.get(Calendar.DAY_OF_MONTH)==Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+        {
+            if((now.get(Calendar.HOUR_OF_DAY)>maxTimeHour)||
+                    (((now.get(Calendar.HOUR_OF_DAY))==maxTimeHour)&&(now.get(Calendar.MINUTE)>maxTimeMinute)))
+            {
+                Helper.displayCenterToast(this, "There are no more available appointments today, please try another date.", Toast.LENGTH_SHORT);
+                return;
+            }
+            time.setMinTime(now.get(Calendar.HOUR_OF_DAY)+1,now.get(Calendar.MINUTE), 0);
+        }
+        time.vibrate(false);
+        time.show(getFragmentManager(), "Timepickerdialog");
+
+    }
+    public void showDatePickerDialog(View v)
+    {
+        Calendar now = Calendar.getInstance();
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                this,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.setThemeDark(true);
+        dpd.setMinDate(now);
+        dpd.vibrate(false);
+        dpd.show(getFragmentManager(), "Datepickerdialog");
+    }
+
+
     @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        myCalendar.set(Calendar.YEAR, year);
+        myCalendar.set(Calendar.MONTH, monthOfYear);
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        dateView.setText(sdf.format(myCalendar.getTime()));
+        timeView.setText("");
+    }
+
+    @Override
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         mHour = hourOfDay;
         mMinute = minute;
         if(mHour>11) {
@@ -278,35 +354,4 @@ public class Appointment extends AppCompatActivity implements TimePickerDialog.O
             }
         }
     }
-    private void updateDateLabel() {
-        String myFormat = "MM/dd/yy";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        dateView.setText(sdf.format(myCalendar.getTime()));
-    }
-    private void showDatePickerDialog() {
-        date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateDateLabel();
-            }
-        };
-
-        dateView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(Appointment.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-    }
-
 }

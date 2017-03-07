@@ -28,9 +28,13 @@
         <activity
             android:name=".PromoDisplay"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".StoreView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Locations"
+            android:screenOrientation="portrait" />
         <activity android:name=".Appointment" />
-        <activity android:name=".Locations" />
-        <activity android:name=".StoreView" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/zoomRed" />
