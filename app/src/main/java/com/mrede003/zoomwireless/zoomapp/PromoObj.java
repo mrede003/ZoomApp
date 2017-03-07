@@ -20,11 +20,11 @@ public class PromoObj {
     }
 
     public PromoObj() {
-        imgName = "";
-        name = "";
-        description = "";
-        expDate = "";
-        previewImg="";
+        imgName = "null";
+        name = "null";
+        description = "null";
+        expDate = "null";
+        previewImg="null";
     }
 
     public void setImgName(String img) {

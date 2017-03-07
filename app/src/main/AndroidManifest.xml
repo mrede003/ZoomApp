@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/zoom_icon"
+        android:icon="@drawable/zoom_icon_proto_bordless"
         android:label="Zoom Wireless"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

@@ -101,23 +101,23 @@ public class Company {
     public Company()
     {
         apptEmails=new ArrayList<>();
-        monThursO="";
-        monThursC="";
-        friO="";
-        friC="";
-        satO="";
-        satC="";
-        sunO="";
-        sunC="";
+        monThursO="null";
+        monThursC="null";
+        friO="null";
+        friC="null";
+        satO="null";
+        satC="null";
+        sunO="null";
+        sunC="null";
         emailPort="587";
         smtpAuth="true";
         starttls="true";
         emailHost="smtp.gmail.com";
-        fromEmail="";
-        fromPassword="";
-        facebook_page_id="";
-        facebook_url="";
-        twitter_username="";
+        fromEmail="null";
+        fromPassword="null";
+        facebook_page_id="null";
+        facebook_url="null";
+        twitter_username="null";
 
     }
     public Company(String monThursO, String monThursC, String friO, String friC, String satO, String satC,

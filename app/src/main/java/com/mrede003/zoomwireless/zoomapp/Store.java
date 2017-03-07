@@ -24,15 +24,15 @@ public class Store {
     public Store()
     {
         staff=new ArrayList<String>();
-        managerName="";
-        email="";
-        address="";
-        name="";
-        storeImg="";
-        bio="";
-        storeImgPre="";
-        phoneNumber="";
-        googleRateLink="";
+        managerName="Suman Bandey";
+        email="mrede003@gmail.com";
+        address="null";
+        name="null";
+        storeImg="null";
+        bio="null";
+        storeImgPre="null";
+        phoneNumber="null";
+        googleRateLink="http://search.google.com/local/writereview?placeid=ChIJAVRwnXmwuokRzAL4ZwNYXTk";
         latitude=-1.0;
         longitude=-1.0;
         milesAway=-1.0;
