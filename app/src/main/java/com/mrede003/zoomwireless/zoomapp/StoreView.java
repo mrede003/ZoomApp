@@ -38,7 +38,6 @@ public class StoreView extends AppCompatActivity {
         setAddressBar();
         Intent in= getIntent();
         Bundle b = in.getExtras();
-
         if(b!=null)
         {
             DESCRIPTION=(String) b.get("DESCRIPTION");

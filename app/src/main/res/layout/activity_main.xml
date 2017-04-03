@@ -4,14 +4,14 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@drawable/back_three"
     tools:context="com.mrede003.zoomwireless.zoomapp.MainActivity">
 
 
     <ImageView
         android:layout_width="160dp"
-        android:layout_height="70dp"
-        android:background="@drawable/logo"
+        android:layout_height="78dp"
+        android:background="@drawable/vz_tcc_logo"
         android:id="@+id/vLogo"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

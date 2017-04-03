@@ -96,17 +96,16 @@ public class StoreList{
             stores.get(i).setMilesAway(x/1609.34);
         }
 
-        //insertion sort cause its I cant imagine he'll ever have more than 1000 stores.
-
-        Store temp;
+        //insertion sort cause I cant imagine he'll ever have more than 1000 stores.
         for (int i = 1; i < stores.size(); i++) {
-            for(int j = i ; j > 0 ; j--){
-                if(stores.get(j).getMilesAway()< stores.get(j-1).getMilesAway()){
-                    temp = stores.get(j);
-                    stores.set(j,stores.get(j-1));
-                    stores.set(j-1, temp);
-                }
+            Store key=stores.get(i);
+            int j=i-1;
+            while(j>-1&&stores.get(j).getMilesAway()>key.getMilesAway())
+            {
+                stores.set(j+1, stores.get(j));
+                j--;
             }
+            stores.set(j+1, key);
         }
     }
 }

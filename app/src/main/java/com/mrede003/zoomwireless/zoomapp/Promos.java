@@ -25,6 +25,8 @@ public class Promos extends Activity {
         setListViewFire();
         setPromoImage();
     }
+
+
     public void setListViewFire()
     {
         LazyPromoAdapter lazy=new LazyPromoAdapter(this,PromoObjList.getInstance().getPromos());
