@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class Company {
 
     private ArrayList<String> apptEmails;
+    private int noti_delay;
+    private String noti_message;
+    private String noti_title;
     private String monThursO;
     private String monThursC;
     private String friO;
@@ -118,12 +121,15 @@ public class Company {
         facebook_page_id="null";
         facebook_url="null";
         twitter_username="null";
+        noti_delay=20000;
+        noti_message="null";
+        noti_title="null";
 
     }
     public Company(String monThursO, String monThursC, String friO, String friC, String satO, String satC,
                    String sunO, String sunC, ArrayList<String> apptEmails, String emailPort, String smtpAuth,
                         String starttls, String emailHost, String fromEmail, String fromPassword, String facebook_page_id,
-                            String facebook_url, String twitter_username)
+                            String facebook_url, String twitter_username, int noti_delay, String noti_message, String noti_title)
     {
         this.monThursO=monThursO;
         this.monThursC=monThursC;
@@ -143,6 +149,9 @@ public class Company {
         this.facebook_url=facebook_url;
         this.facebook_page_id=facebook_page_id;
         this.twitter_username=twitter_username;
+        this.noti_delay=noti_delay;
+        this.noti_message=noti_message;
+        this.noti_title=noti_title;
     }
     public ArrayList<String> getApptEmails() {
         return apptEmails;
@@ -214,6 +223,30 @@ public class Company {
 
     public void setSunC(String sunC) {
         this.sunC = sunC;
+    }
+
+    public String getNoti_message() {
+        return noti_message;
+    }
+
+    public void setNoti_message(String noti_message) {
+        this.noti_message = noti_message;
+    }
+
+    public int getNoti_delay() {
+        return noti_delay;
+    }
+
+    public void setNoti_delay(int noti_delay) {
+        this.noti_delay = noti_delay;
+    }
+
+    public String getNoti_title() {
+        return noti_title;
+    }
+
+    public void setNoti_title(String note_title) {
+        this.noti_title = note_title;
     }
 
 }

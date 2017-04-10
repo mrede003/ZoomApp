@@ -4,7 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_three"
+    android:background="@drawable/back_one"
     tools:context="com.mrede003.zoomwireless.zoomapp.MainActivity">
 
 

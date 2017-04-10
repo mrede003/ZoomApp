@@ -1,23 +1,31 @@
 package com.mrede003.zoomwireless.zoomapp;
 
+
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback  {
     private boolean alreadyRan=false;
+    private SharedPreferences prefs=null;
+    private RelativeLayout mainLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StoreList.getInstance();
@@ -33,12 +41,72 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             }
         }
         alreadyRan=true;
+
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences("com.mrede003.zoomwireless.zoomapp", MODE_PRIVATE);
+        mainLayout =(RelativeLayout)findViewById(R.id.activity_main);
+        setBackGround(prefs);
         getSupportActionBar().hide();
         Helper.setBlackStatus(this);
         getLocationPermission();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (prefs.getBoolean("firstrun", true))
+        {
+            if(poorImplementation())
+                scheduleNotification(Helper.getNotification(CompanyList.getInstance().getCompany().getNoti_message(),
+                        CompanyList.getInstance().getCompany().getNoti_title(),this),
+                        CompanyList.getInstance().getCompany().getNoti_delay());
+            prefs.edit().putBoolean("firstrun", false).apply();
+        }
+    }
+    //Because firebase is cool and easy, but missing so many useful APIs
+    //This method checks to see if the 3 string values required for the notification are null
+    //IE: Firebase hasn't downloaded them yet. If so forget the notifications all together
+    //Why does it have to be on a seperate thread?????
+    //Theres probably a way better way to do this but this will do for now
+    public boolean poorImplementation()
+    {
+        if(CompanyList.getInstance().getCompany().getNoti_message()==null
+        ||CompanyList.getInstance().getCompany().getNoti_title()==null
+        ||CompanyList.getInstance().getCompany().getNoti_delay()==0)
+            return false;
+        return true;
+    }
+    public void setBackGround(SharedPreferences prefs)
+    {
+        if (prefs.getBoolean("firstrun", true))
+        {
+            prefs.edit().putInt("background", 1).apply();
+        }else {
+            int newNum = prefs.getInt("background", 1);
+            if (newNum == 4) {
+                newNum = 1;
+            } else {
+                newNum++;
+            }
+            prefs.edit().putInt("background", newNum).apply();
+            Drawable newBackground;
+            switch(newNum)
+            {
+                case 1: newBackground=ContextCompat.getDrawable(this, R.drawable.back_one);
+                    break;
+                case 2: newBackground=ContextCompat.getDrawable(this, R.drawable.back_two);
+                    break;
+                case 3: newBackground=ContextCompat.getDrawable(this, R.drawable.back_three);
+                    break;
+                case 4: newBackground=ContextCompat.getDrawable(this, R.drawable.back_four);
+                    break;
+                default: newBackground=ContextCompat.getDrawable(this, R.drawable.back_one);
+                    break;
+            }
+            mainLayout.setBackground(newBackground);
+        }
     }
     public void openPromos(View view)
     {
@@ -115,18 +183,23 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                     statusCheck();
                 } else {
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     Toast.makeText(this, "Some features will not work, please enable the Location permission", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
+    private void scheduleNotification(Notification notification, int delay) {
 
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
     public void statusCheck() {
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 

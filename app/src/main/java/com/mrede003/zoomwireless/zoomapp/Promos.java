@@ -39,7 +39,7 @@ public class Promos extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
+                                    long id) {      
                 Intent intent = new Intent(Promos.this, PromoDisplay.class);
                 intent.putExtra("IMG_NAME", promoList.get(position).getImgName());
                 intent.putExtra("DESCRIPTION", promoList.get(position).getDescription());
