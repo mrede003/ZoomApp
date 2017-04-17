@@ -48,22 +48,22 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         prefs = getSharedPreferences("com.mrede003.zoomwireless.zoomapp", MODE_PRIVATE);
         mainLayout =(RelativeLayout)findViewById(R.id.activity_main);
-        setBackGround(prefs);
+
         getSupportActionBar().hide();
         Helper.setBlackStatus(this);
         getLocationPermission();
     }
     @Override
-    protected void onStop() {
-        super.onStop();
-        if (prefs.getBoolean("firstrun", true))
-        {
-            if(poorImplementation())
-                scheduleNotification(Helper.getNotification(CompanyList.getInstance().getCompany().getNoti_message(),
-                        CompanyList.getInstance().getCompany().getNoti_title(),this),
-                        CompanyList.getInstance().getCompany().getNoti_delay());
-            prefs.edit().putBoolean("firstrun", false).apply();
-        }
+    protected void onResume()
+    {
+        super.onResume();
+        setBackGround(prefs);
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        checkFirstRun();
     }
     //Because firebase is cool and easy, but missing so many useful APIs
     //This method checks to see if the 3 string values required for the notification are null
@@ -77,6 +77,17 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         ||CompanyList.getInstance().getCompany().getNoti_delay()==0)
             return false;
         return true;
+    }
+    public void checkFirstRun()
+    {
+        if (prefs.getBoolean("firstrun", true))
+        {
+            if(poorImplementation())
+                scheduleNotification(Helper.getNotification(CompanyList.getInstance().getCompany().getNoti_message(),
+                        CompanyList.getInstance().getCompany().getNoti_title(),this),
+                        CompanyList.getInstance().getCompany().getNoti_delay());
+            prefs.edit().putBoolean("firstrun", false).apply();
+        }
     }
     public void setBackGround(SharedPreferences prefs)
     {
@@ -126,10 +137,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     }
     public void openFacebook(View view)
     {
-        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-        String facebookUrl = getFacebookPageURL(this);
-        facebookIntent.setData(Uri.parse(facebookUrl));
-        startActivity(facebookIntent);
+
+        Intent intent=new Intent(this, SocialMedia.class);
+        startActivity(intent);
+        //Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+        //String facebookUrl = getFacebookPageURL(this);
+        //facebookIntent.setData(Uri.parse(facebookUrl));
+        //startActivity(facebookIntent);
     }
     public String getFacebookPageURL(Context context) {
         PackageManager packageManager = context.getPackageManager();
