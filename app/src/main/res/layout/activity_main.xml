@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Like Us!"
+            android:text="Social Media"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:textStyle="normal|bold"
@@ -61,7 +61,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Follow Us!"
+            android:text="Website"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:textStyle="normal|bold"
@@ -70,7 +70,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="65dp"
         android:id="@+id/buttonLayout"
         android:layout_above="@id/textLayout"
         android:orientation="horizontal"
@@ -81,10 +81,9 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingLeft="10dp"
-
             android:onClick="openPromos"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:gravity="bottom|center"
             />
         <Button
@@ -110,15 +109,15 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:gravity="bottom|center"
-            android:onClick="openFacebook"/>
+            android:onClick="openSocialMedia"/>
         <Button
             android:id="@+id/twitterButton"
-            android:background="@drawable/twitter"
+            android:background="@drawable/website"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:gravity="bottom|center"
-            android:onClick="openTwitter"/>
+            android:onClick="openWebsite"/>
 
     </LinearLayout>
 

@@ -29,6 +29,31 @@ public class Company {
     private String facebook_url;
     private String facebook_page_id;
     private String twitter_username;
+    private String insta_id;
+    private String google_plus_id;
+    private String website_url;
+    public String getWebsite_url() {
+        return website_url;
+    }
+
+    public void setWebsite_url(String website_url) {
+        this.website_url = website_url;
+    }
+    public String getInsta_id() {
+        return insta_id;
+    }
+
+    public void setInsta_id(String insta_id) {
+        this.insta_id = insta_id;
+    }
+    public String getGoogle_plus_id() {
+        return google_plus_id;
+    }
+
+    public void setGoogle_plus_id(String google_plus_id) {
+        this.google_plus_id = google_plus_id;
+    }
+
 
     public String getFacebook_url() {
         return facebook_url;
@@ -124,12 +149,16 @@ public class Company {
         noti_delay=20000;
         noti_message="null";
         noti_title="null";
+        insta_id="null";
+        google_plus_id="null";
+        website_url="null";
 
     }
     public Company(String monThursO, String monThursC, String friO, String friC, String satO, String satC,
                    String sunO, String sunC, ArrayList<String> apptEmails, String emailPort, String smtpAuth,
                         String starttls, String emailHost, String fromEmail, String fromPassword, String facebook_page_id,
-                            String facebook_url, String twitter_username, int noti_delay, String noti_message, String noti_title)
+                            String facebook_url, String twitter_username, int noti_delay, String noti_message, String noti_title,
+                                String insta_id, String google_plus_id, String website_url)
     {
         this.monThursO=monThursO;
         this.monThursC=monThursC;
@@ -152,6 +181,9 @@ public class Company {
         this.noti_delay=noti_delay;
         this.noti_message=noti_message;
         this.noti_title=noti_title;
+        this.website_url=website_url;
+        this.insta_id=insta_id;
+        this.google_plus_id=google_plus_id;
     }
     public ArrayList<String> getApptEmails() {
         return apptEmails;

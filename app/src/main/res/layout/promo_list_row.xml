@@ -21,10 +21,11 @@
         android:id="@id/promoListImage"
         android:layout_width="100dip"
         android:layout_height="100dip"
-        android:padding="3dip"
+        android:padding="1dip"
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dip"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@color/black"/>
 
     <!-- Artist Name -->
     <TextView
@@ -35,7 +36,8 @@
         android:textColor="#343434"
         android:textSize="15dip"
         android:layout_marginTop="1dip"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/promoListImage"/>
 
 
 </RelativeLayout>

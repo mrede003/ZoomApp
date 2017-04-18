@@ -135,42 +135,17 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         Intent intent=new Intent(this, Locations.class);
         startActivity(intent);
     }
-    public void openFacebook(View view)
+    public void openSocialMedia(View view)
     {
 
         Intent intent=new Intent(this, SocialMedia.class);
         startActivity(intent);
-        //Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-        //String facebookUrl = getFacebookPageURL(this);
-        //facebookIntent.setData(Uri.parse(facebookUrl));
-        //startActivity(facebookIntent);
     }
-    public String getFacebookPageURL(Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-
-            boolean activated =  packageManager.getApplicationInfo("com.facebook.katana", 0).enabled;
-            if(activated){
-                if ((versionCode >= 3002850)) {
-                    return "fb://facewebmodal/f?href=" + CompanyList.getInstance().getCompany().getFacebook_url();
-                } else {
-                    return "fb://page/" + CompanyList.getInstance().getCompany().getFacebook_page_id();
-                }
-            }else{
-                return CompanyList.getInstance().getCompany().getFacebook_url();
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            return CompanyList.getInstance().getCompany().getFacebook_url();
-        }
-    }
-    public void openTwitter(View view)
+    public void openWebsite(View view)
     {
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + CompanyList.getInstance().getCompany().getTwitter_username())));
-        }catch (Exception e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + CompanyList.getInstance().getCompany().getTwitter_username())));
-        }
+        Uri uriUrl = Uri.parse(CompanyList.getInstance().getCompany().getWebsite_url());
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
     }
 
     public void getLocationPermission()
