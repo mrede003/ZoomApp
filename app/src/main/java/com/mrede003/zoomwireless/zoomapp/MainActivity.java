@@ -48,23 +48,21 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         prefs = getSharedPreferences("com.mrede003.zoomwireless.zoomapp", MODE_PRIVATE);
         mainLayout =(RelativeLayout)findViewById(R.id.activity_main);
+        setBackGround(prefs);
 
         getSupportActionBar().hide();
         Helper.setBlackStatus(this);
         getLocationPermission();
+
     }
     @Override
-    protected void onResume()
+    protected void onStop()
     {
-        super.onResume();
-        setBackGround(prefs);
-    }
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
+        super.onStop();
         checkFirstRun();
     }
+
+
     //Because firebase is cool and easy, but missing so many useful APIs
     //This method checks to see if the 3 string values required for the notification are null
     //IE: Firebase hasn't downloaded them yet. If so forget the notifications all together
